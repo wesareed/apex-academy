@@ -4,9 +4,9 @@ trigger AssignLeadeGrade on Lead (before insert, before update) {
            if(myLead.Score__c == 100){
                myLead.Grade__c = 'A+';
            } else if (myLead.Score__c >= 90){
-               myLead.Grade__c = 'B';
+               myLead.Grade__c = 'A';
            } else if (myLead.Score__c >= 80){
-               myLead.Grade__c = 'C';
+               myLead.Grade__c = 'B';
            } else {
                myLead.Grade__c = 'F';
                myLead.Status = 'Closed - Not Converted';
