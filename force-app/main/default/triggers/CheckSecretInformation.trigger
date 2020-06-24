@@ -27,9 +27,6 @@ trigger CheckSecretInformation on Case (after insert, before update) {
     //Step 3: If our case contains a secret keyword, create a child case
     List<Case> casesToCreate = new List<Case>();
     Set<String> foundWords = new Set<String>();
-    
-    
-
     for (Case caseWithSecretInfo : casesWithSecretInfo) {
         Case childCase = new Case();
         childCase.Subject     = childCaseSubject;
@@ -45,8 +42,6 @@ trigger CheckSecretInformation on Case (after insert, before update) {
             }
         }
         childCase.Description = 'The following keywords were found ' + foundWords;
-        //System.debug(foundWords);
-        
         casesToCreate.add(childCase);
     }
     insert casesToCreate;
