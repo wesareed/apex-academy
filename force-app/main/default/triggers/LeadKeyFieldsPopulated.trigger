@@ -9,6 +9,7 @@ trigger LeadKeyFieldsPopulated on Lead (before insert) {
         //fields.add(l.Website);
         //fields.add(l.Title);
 
+        //Step 1: add field labels and fields to a map
         Map<String,String> mapFields = new Map<String,String>();
         mapFields.put(Schema.Lead.fields.FirstName.getDescribe().getLabel(), l.FirstName);
         mapFields.put(Schema.Lead.fields.LastName.getDescribe().getLabel(), l.LastName);
@@ -17,7 +18,7 @@ trigger LeadKeyFieldsPopulated on Lead (before insert) {
         mapFields.put(Schema.Lead.fields.Website.getDescribe().getLabel(), l.Website);
         mapFields.put(Schema.Lead.fields.Title.getDescribe().getLabel(), l.Title);
 
-
+        //Step2: Check if each field has a value and increase key fields populated field and add to populated fields list
         List<String> populatedFields = new List<String>();
         Integer count = 0;
         for(String field : mapFields.keySet()){
@@ -42,7 +43,8 @@ trigger LeadKeyFieldsPopulated on Lead (before insert) {
         //labels.add(Schema.Lead.fields.Email.getDescribe().getLabel());
         //labels.add(Schema.Lead.fields.Website.getDescribe().getLabel());
         //labels.add(Schema.Lead.fields.Title.getDescribe().getLabel());
-
+        
+        //Step 3: Create a task for each key field that is populated
         List<Task> taskToCreate = new List<Task>();
         if(l.Key_Fields_Populated__c >= 3) {
             for(String field : populatedFields) {
