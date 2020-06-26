@@ -1,13 +1,5 @@
 trigger LeadKeyFieldsPopulated on Lead (before insert) {
     for(Lead l : Trigger.new){
-        
-        //List<String> fields = new List<String>();
-        //fields.add(l.FirstName);
-        //fields.add(l.LastName);
-        //fields.add(l.Phone);
-        //fields.add(l.Email);
-        //fields.add(l.Website);
-        //fields.add(l.Title);
 
         //Step 1: add field labels and fields to a map
         Map<String,String> mapFields = new Map<String,String>();
@@ -28,23 +20,8 @@ trigger LeadKeyFieldsPopulated on Lead (before insert) {
                 populatedFields.add(field);
             }
         }
-        //for(String field : fields){
-            //if(String.isNotBlank(field)){
-                //count = count + 1;
-                //l.Key_Fields_Populated__c = count;
-                //populatedFields.add(field);
-            //}
-        //}
-
-        //List<String> labels = new List<String>();
-        //labels.add(Schema.Lead.fields.FirstName.getDescribe().getLabel());
-        //labels.add(Schema.Lead.fields.LastName.getDescribe().getLabel());
-        //labels.add(Schema.Lead.fields.Phone.getDescribe().getLabel());
-        //labels.add(Schema.Lead.fields.Email.getDescribe().getLabel());
-        //labels.add(Schema.Lead.fields.Website.getDescribe().getLabel());
-        //labels.add(Schema.Lead.fields.Title.getDescribe().getLabel());
         
-        //Step 3: Create a task for each key field that is populated
+        //Step 3: Create a task for each key field that is populated if key fields populated are greater than 3P
         List<Task> taskToCreate = new List<Task>();
         if(l.Key_Fields_Populated__c >= 3) {
             for(String field : populatedFields) {
