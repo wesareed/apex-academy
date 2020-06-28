@@ -32,5 +32,27 @@ trigger LeadKeyFieldsPopulated on Lead (before insert) {
             }
             insert taskToCreate;
         }
+
+        //Step 4: Create a list to hold all of the key fields that contain the word 'test'
+        List<String> testFields = new List<String>();
+        for(String key : mapFields.keySet()){
+            if(mapFields.get(key) != null && mapFields.get(key).containsIgnoreCase('test')){
+                testFields.add(key);
+            }
+        }
+
+        //Step 5: Create a warning task for each field that contains the word 'test'
+        List<Task> warningTask  = new List<Task>();
+        for(String field : mapFields.values()){
+            if(field != null && field.containsIgnoreCase('test')){
+                Task myTask = new Task();
+                myTask.WhatId      = l.Id;
+                myTask.Subject     = 'WARNING';
+                myTask.Description = 'This Lead contains the TEST keyword in the following key fields: ' + testFields;
+                warningTask.add(myTask);
+            }
+        }
+
+        insert warningTask;
     }
 }
