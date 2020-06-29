@@ -4,9 +4,8 @@ private class NoTestLeadTest {
         Lead l = new Lead();
 
         l.FirstName = 'Test';
-        l.LastName  = 'Smith';
+        l.LastName  = 'Test';
         l.Company   = 'Deloitte';
-        l.Status    = 'Disqualified';
         insert l; 
     }
 }

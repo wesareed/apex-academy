@@ -1,15 +1,10 @@
 trigger NoTestLead on Lead (before insert, before update) {
     
     String testValue = 'test';
-    List<Lead> leadsToDisqualify = new List<Lead>();
 
     for(Lead l : Trigger.new) {
-        if(l.FirstName == testValue && l.FirstName != null || l.LastName == testValue && l.LastName != null){
-            leadsToDisqualify.add(l);
+        if(l.FirstName != null && l.FirstName.equalsIgnoreCase(testValue) && l.LastName != null && l.LastName.equalsIgnoreCase(testValue)){
+            l.Status = 'Disqualified';
         }
-    }
-
-    for(Lead dql : leadsToDisqualify) {
-        dql.Status = 'Disqualified';
     }
 }
