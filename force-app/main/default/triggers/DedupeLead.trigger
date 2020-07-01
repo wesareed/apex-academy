@@ -21,7 +21,7 @@ trigger DedupeLead on Lead (before insert) {
                                                     WHERE (Email != null 
                                                     AND Email = :myLead.Email) 
                                                     OR (FirstName != null 
-                                                    AND FirstName Like :firstNameMatch 
+                                                    AND FirstName LIKE :firstNameMatch 
                                                     AND LastName = :myLead.LastName 
                                                     AND Account.Name LIKE :companyMatch)];
         System.debug(matchingContacts.size() + ' contacts found.');
