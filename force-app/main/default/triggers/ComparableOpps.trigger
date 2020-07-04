@@ -18,7 +18,7 @@ trigger ComparableOpps on Opportunity (after insert) {
                                                    AND Amount <= :maxAmount
                                                    AND Account.Industry = :oppWithAccountInfo.Account.Industry
                                                    AND StageName = 'Closed Won'
-                                                   AND Owner.Position_Start_Date__c < LAST_N_DAYS:365
+                                                   //AND Owner.Position_Start_Date__c < LAST_N_DAYS:365
                                                    AND CloseDate >= LAST_N_DAYS:365
                                                    AND Id != :opp.Id];
         System.debug('Comparable opp(s) found: ' + comparableOpps);
