@@ -6,7 +6,7 @@ trigger ClosedCase on Case (before insert) {
                                         FROM Case 
                                         WHERE ContactId = :myCase.ContactId 
                                         AND CreatedDate = TODAY];
-            //Check how many cases are in the list...if greater than or equal to 2 set the case status to closed
+            //Check how many cases are in the list...if greater than or equal to 2 set the case status to closedq
             if(casesToday.size() >= 2){
                 myCase.Status = 'Closed';
             }
