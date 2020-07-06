@@ -9,7 +9,7 @@ trigger UpdateContactPhone on Account (before update) {
 
             //Loop through and update each contacts phone if country's match
             for(Contact con : contacts){
-                if(acc.BillingCountry != con.MailingCountry){
+                if(acc.BillingCountry != con.MailingCountry && con.MailingCountry != null){
                     break;
                 }
                 else {
