@@ -1,4 +1,7 @@
 trigger OwnerManager on Opportunity (after insert) {
+    //Criteria: Upon opportunity creation, add the opportunity owner's manager as an
+    //opportunity team member with role 'Sales Manager'.
+
     for(Opportunity opp : Trigger.new){
         //Get opporutnity with Manager Info
         Opportunity oppWithManagerInfo = [SELECT Id, Owner.ManagerId FROM Opportunity WHERE Id = :opp.Id];
