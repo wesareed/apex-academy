@@ -6,9 +6,14 @@ trigger UpdateContactPhone on Account (before update) {
             //Get related Contacts
             List<Contact> contacts = [SELECT Id FROM Contact WHERE Id = :acc.Id];
 
-            //Loop through and update each contacts phone
+            //Loop through and update each contacts phone if country's match
             for(Contact con : contacts){
-                con.OtherPhone = acc.Phone; 
+                if(acc.BillingCountry != con.MailingCountry){
+                    break;
+                }
+                else {
+                    con.OtherPhone = acc.Phone; 
+                }
             }
             update contacts; 
         }
