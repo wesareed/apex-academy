@@ -12,7 +12,7 @@ trigger UpdateContactPhone on Account (before update) {
                 if(acc.BillingCountry != con.MailingCountry){
                     break;
                 }
-                else if(con.MailingCountry != null) {
+                else if(con.MailingCountry != null && con.MailingCountry == acc.BillingCountry) {
                     con.OtherPhone = acc.Phone; 
                 }
             }
